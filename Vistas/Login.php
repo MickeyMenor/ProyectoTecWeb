@@ -1,12 +1,10 @@
 <?php
-
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 ?>
-
 <html>
     <head>
         <meta charset="UTF-8">
@@ -26,8 +24,17 @@
             </div>
         </header>
         
-        <form action="http://localhost:8080/ProyectoTecWeb/Vistas/Login.php" method="post">
+        <form action="http://localhost:8080/ProyectoTecWeb/Controladores/Login.php" method="post">
+            Usuario: <input type="text" name="nomUsuario"> <br>
+            Contraseña: <input type="text" name="passwrd">
+            
             <input type="submit" value="Entrar">
+            <div id="textoError">
+                <?php
+                    if (isset($_SESSION['MensajeLogin']))
+                        echo $_SESSION['MensajeLogin'];
+                ?>
+            </div>
         </form> 
     </body>
 </html>

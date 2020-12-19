@@ -1,10 +1,12 @@
 <?php
-
+    
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+    
+
 ?>
 <html>
     <head>
@@ -30,11 +32,9 @@
             a la tienda <br>
         </h2>
         
-        <form action="http://localhost:8080/ProyectoTecWeb/Vistas/Login.php">
-            <input type="submit" value="Iniciar Sesión">
-        </form> 
-        <form action="http://localhost:8080/ProyectoTecWeb/Vistas/Registro.php">
-            <input type="submit" value="Registrarse">
+        <form action="http://localhost:8080/ProyectoTecWeb/Vistas/Bienvenida.php" method="post">
+            <input type="submit" name="botonInicioSesion" value="Iniciar Sesión">
+            <input type="submit" name="botonRegistro" value="Registrarse">
         </form> 
     </body>
 </html>

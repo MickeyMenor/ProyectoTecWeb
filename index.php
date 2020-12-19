@@ -7,4 +7,5 @@
  */
 
 include 'Vistas/Bienvenida.php';
+include 'Controladores/Controlador.php'
 ?>
