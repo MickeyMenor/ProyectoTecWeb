@@ -21,9 +21,8 @@
             ?>
                 <div class="row ml-2 mt-5 mb-3">
                     <h3> 
-                        ¡Bienvenido! Por favor inicia <br>
-                        sesión o regístrate para acceder <br> 
-                        a la tienda <br>
+                        Por favor inicia sesión <br> 
+                        o regístrate <br>
                     </h3>
                 </div>
             </header>

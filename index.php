@@ -5,5 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-header('Location: Vistas/Bienvenida/Bienvenida.php');
+header('Location: Vistas/PaginaPrincipal/PaginaPrincipal.php');
+//header('Location: Vistas/Bienvenida/Bienvenida.php');
 ?>

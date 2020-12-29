@@ -14,9 +14,7 @@ and open the template in the editor.
     padding-top: 50px;
 }
 
-.form-inicioSesion
+.navlink-custom
 {
-    width: 350px;
-    padding-left: 50px;
-    padding-top: 50px;
+    background-color: black;
 }

@@ -16,7 +16,7 @@ include('/opt/lampp/htdocs/ProyectoTecWeb/Clases/BaseDeDatos.php');
 
 class ControladorBienvenida 
 {
-    private $loginInvalido;
+    private $loginValido;
     private $usuarioTecleado;
     private $contraseñaTecleada;
     private $usuarioValido; 
@@ -40,12 +40,10 @@ class ControladorBienvenida
             session_destroy(); 
             session_start();
             $_SESSION['usuario'] = serialize($usuario->aArreglo());
-            
-            if ($usuario->rol() == 1)
-                header("Location: /ProyectoTecWeb/Vistas/Farmacia/VistaUsuario.php");
-            else if ($usuario->rol() == 2)
-                header("Location: /ProyectoTecWeb/Vistas/Farmacia/VistaAdmin.php");
+            header("Location: /ProyectoTecWeb/Vistas/PaginaPrincipal/PaginaPrincipal.php");
         }
+        else
+            echo 'Usuario y/o contraseña incorrectos';
     }
     
     public function validaInicioSesion()
@@ -63,6 +61,12 @@ class ControladorBienvenida
                 $usuario->cambiaContraseña($_POST['passwrd']);
                 $this->validaUsuario($usuario);
             }
+            
+            if (!$this->usuarioTecleado)
+                echo 'Porfavor introduce el nombre de usuario <br>';
+                
+            if (!$this->contraseñaTecleada)
+                echo 'Porfavor introduce la contraseña <br>';
         }
     }
 }
