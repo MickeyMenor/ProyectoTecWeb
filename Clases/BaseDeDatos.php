@@ -36,25 +36,71 @@ class BaseDeDatos
         self::$instancia = self::$instancia ?? new BaseDeDatos();
         return self::$instancia;
     }
-
-    private function asignaResultadoUsuario(Usuario $usuario, $renglon)
-    {
-        $usuario->cambiaId($renglon['IdUsuario']);
-        $usuario->cambiaNombre($renglon['Nombre']);
-        $usuario->cambiaCorreo($renglon['Email']);
-        $usuario->cambiaRol($renglon['Rol']);
-    }
     
-    public function obtenUsuario(Usuario $usuario)
+    public function sqli() : mysqli { return $this->mysqli; }
+    
+    public function obtenMedicamento(Medicamento &$medicamento)
     {
-        $consulta = "SELECT * FROM Usuario WHERE Alias = '".$usuario->alias()."'";
-        $consulta .= " AND Contrasenia = '". $usuario->contraseña()."'";
+        $consulta = "SELECT * FROM InfoMedicamentos WHERE IdMedicamento = '".$medicamento->idMedicamento()."'";
         $resultado = $this->mysqli->query($consulta);
         
         if ($resultado->num_rows == 1)
         {
             $renglon = $resultado->fetch_assoc();
-            $this->asignaResultadoUsuario($usuario, $renglon);
+            $medicamento = $this->creaMedicamento($renglon);
         }
+    }
+    
+    private function creaSustancia($renglon)
+    {
+        $sustancia = new Sustancia();
+        $sustancia->cambiaId($renglon['IdSustancia']);
+        $sustancia->cambiaNombre($renglon['NombreSustancia']);
+        
+        return $sustancia;
+    }
+    
+    private function creaLaboratorio($renglon)
+    {
+        $laboratorio = new Laboratorio();
+        $laboratorio->cambiaId($renglon['IdLaboratorio']);
+        $laboratorio->cambiaNombre($renglon['NombreLaboratorio']);
+        
+        return $laboratorio;
+    }
+    
+    private function creaMedicamento($renglon)
+    {
+        $medicamento = new Medicamento();
+        $medicamento->cambiaId($renglon['IdMedicamento']);
+        $medicamento->cambiaSustancia($this->creaSustancia($renglon));
+        $medicamento->cambiaLaboratorio($this->creaLaboratorio($renglon));
+        $medicamento->cambiaFormaPresentacion($renglon['Forma']);
+        $medicamento->cambiaDosis($renglon['Dosis_mg']);
+        $medicamento->cambiaCantidad($renglon['Cantidad']);
+        $medicamento->cambiaFoto($renglon['Foto']);
+        $medicamento->cambiaCosto($renglon['Costo']);
+        $medicamento->cambiaStock($renglon['Stock']);
+        
+        return $medicamento;
+    }
+    
+    public function obtenMedicamentos()
+    {
+        $arregloMedicamentos = array();
+        $consulta = "SELECT * FROM InfoMedicamentos";
+        $resultado = $this->mysqli->query($consulta);
+        $arreglo = $resultado->fetch_all(MYSQLI_ASSOC);
+        
+        foreach($arreglo as $renglon)
+            array_push($arregloMedicamentos, $this->creaMedicamento($renglon));
+        
+        return $arregloMedicamentos;
+    }
+    
+    public function borraMedicamento($id)
+    {
+        $consulta = "DELETE FROM Medicamento WHERE IdMedicamento = '".$id."'";
+        $this->mysqli->query($consulta);
     }
 }

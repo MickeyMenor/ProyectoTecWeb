@@ -1,8 +1,7 @@
 <?php
-    include('ControladorGestorFarmacia.php');
-    $controlador = new ControladorGestorFarmacia();
+    include('/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/GestorProductos/ControladorGestorProductos.php');
+    $controlador = new ControladorGestorProductos();
 ?>
-
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -18,10 +17,13 @@ and open the template in the editor.
             <?php 
                 include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/Encabezado/Encabezado.php';
             ?>
-            <div class="row align-items-start">
-                <?php 
-                    include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/NavBar/NavBar.php';
-                ?>
+            <div class="container">
+                <div class="row align-items-start">
+                    <?php 
+                        include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/NavBar/NavBar.php';
+                        $controlador->muestraTarjetaMedicamento();
+                    ?>
+                </div>
             </div>
         </div>
     </body>

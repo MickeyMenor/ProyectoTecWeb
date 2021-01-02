@@ -21,6 +21,8 @@ abstract class Controlador
     
     protected function __construct()
     {
+        session_start();
+        
         if (isset($_SESSION['usuario']))
         {
             $this->usuario = new Usuario();
@@ -39,9 +41,7 @@ abstract class Controlador
         else
         {
             echo '<a class="dropdown-item" href="/ProyectoTecWeb/Vistas/Bienvenida/Bienvenida.php"> Iniciar sesión </a>';
-            echo '<a class="dropdown-item" href="#"> Registrarse </a>';
+            echo '<a class="dropdown-item" href="/ProyectoTecWeb/Vistas/Bienvenida/RegistroUsuario.php"> Registrarse </a>';
         }
     }
-    
-    abstract public static function instancia();
 }
