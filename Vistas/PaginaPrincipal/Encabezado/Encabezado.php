@@ -15,7 +15,7 @@ and open the template in the editor.
             </div>
         </div>
     </div>
-    <div class="col-sm"> 
+    <div class="col-md"> 
         <div class="pl-5 row justify-content-end">
             <div class="px-2 col-xs"> 
                 <div class="btn-group" role="group">
@@ -39,5 +39,18 @@ and open the template in the editor.
                 </a>
             </div>
         </div>
+    </div>
+</div>
+<div class="ml-2 mt-3 row align-items-center">
+    <div class="col-xl">
+        <nav class="navbar navbar-dark bg-success">
+            <a class="px-1 navbar-brand" href="#"> Nuestros productos </a>
+            <a class="px-1 navbar-brand" href="#"> Nuestras ofertas </a>
+            <a class="px-1 navbar-brand" href="#"> Busque un producto </a>
+            <a class="px-1 navbar-brand" href="#"> Contáctenos </a>
+            <?php
+                $controlador->verificaMenuNavegacion();
+            ?>
+        </nav>
     </div>
 </div>

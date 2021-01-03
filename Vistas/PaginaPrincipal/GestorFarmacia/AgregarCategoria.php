@@ -1,6 +1,6 @@
 <?php
     include('/opt/lampp/htdocs/ProyectoTecWeb/Controladores/ControladorGestorCategorias.php');
-    $controlador = ControladorGestorCategorias::instancia();
+    $controlador = new ControladorGestorCategorias();
     $controlador->validaCategoria();
 ?>
 <!DOCTYPE html>
@@ -10,18 +10,18 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-<?php 
-    include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/Metadatos/Metadatos.php';
-?>
+    <?php 
+        include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/Metadatos/Metadatos.php';
+    ?>
     <body>
         <div class="container">
-<?php 
-    include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/Encabezado/Encabezado.php';
-?>
+            <?php 
+                include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/Encabezado/Encabezado.php';
+            ?>
             <div class="row align-items-start">
-<?php 
-    include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/NavBar/NavBar.php';
-?>
+                <?php 
+                    include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/NavBar/NavBar.php';
+                ?>
                 <div class="col-lg">
                     <div class="mt-5 ml-5 row align-items-center">
                         <form method="post" action="/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/AgregarCategoria.php">

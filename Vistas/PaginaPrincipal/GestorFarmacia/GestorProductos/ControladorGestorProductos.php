@@ -11,7 +11,7 @@
  *
  * @author mickey
  */
-include('/opt/lampp/htdocs/ProyectoTecWeb/Controladores/ControladorGestorFarmacia.php');
+include('/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/ControladorGestorFarmacia.php');
 
 class ControladorGestorProductos extends ControladorGestorFarmacia
 {
@@ -21,34 +21,6 @@ class ControladorGestorProductos extends ControladorGestorFarmacia
     {
         parent::__construct();
         $this->ruta = "Location: /ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/GestorProductos/GestorProductos.php";
-    }
-    
-    private function creaTabla($arreglo, $nombres)
-    {
-        $cadena = '<div class="table-responsive"><table class="table align-middle"><thead><tr>';
-        
-        foreach ($nombres as $clave => $valor)
-            $cadena .= '<th scope="col">'.$clave.'</th>';
-        
-        $cadena .= '<th scope="col"> Info. </th></tr></thead><tbody>';
-        
-        foreach($arreglo as $renglon)
-        {
-            $cadena .= '<tr>';
-            
-            foreach ($nombres as $clave => $valor)
-                $cadena .= '<td class="align-middle" scope="row">'
-                .($valor === 'Foto' 
-                ? '<img src="data:image/jpg;base64,'.base64_encode($renglon[$valor]).'" width="180" height="180"/>' 
-                : $renglon[$valor]).'</td>';
-            
-            $cadena .= '<td class="align-middle" scope="row">';
-            $cadena .= '<a class="btn btn-primary" href="./VerProducto/VerProducto.php';
-            $cadena .= '?id='.$renglon['IdMedicamento'].'" role="button"> Ver Producto </a></td></tr>';
-        }
-        
-        $cadena .= '</tbody></table></div>';
-        return $cadena;
     }
     
     private function creaTarjetaMedicamento(Medicamento $medicamento)
@@ -69,6 +41,15 @@ class ControladorGestorProductos extends ControladorGestorFarmacia
         $tarjeta .= '</div></div></div>';
         
         return $tarjeta;
+    }
+    
+    protected function creaBoton($renglon) 
+    {
+        $cadena = parent::creaBoton($renglon);
+        $cadena .= '<a class="btn btn-primary" href="./VerProducto/VerProducto.php';
+        $cadena .= '?id='.$renglon['IdMedicamento'].'" role="button"> Ver Producto </a></td></tr>';
+        
+        return $cadena;
     }
     
     private function agregaSustancia($sqli, $nombre)
@@ -238,8 +219,9 @@ class ControladorGestorProductos extends ControladorGestorFarmacia
         
         $sqli = BaseDeDatos::instancia()->sqli();
         $consulta = "SELECT * FROM InfoMedicamentos";
-        $arreglo = $sqli->query($consulta)->fetch_all(MYSQLI_ASSOC);
-        echo $this->creaTabla($arreglo, $nombres);
+        $resultado = $sqli->query($consulta);
+        $arreglo = !$resultado ? array() : $resultado->fetch_all(MYSQLI_ASSOC);
+        echo parent::creaTabla($arreglo, $nombres);
     }
     
     public function muestraSustancias()

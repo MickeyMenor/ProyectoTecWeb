@@ -17,6 +17,7 @@ and open the template in the editor.
             <?php 
                 include 'Encabezado/Encabezado.php';
             ?>
+            <!--
             <div class="ml-2 mt-3 row align-items-center">
                 <div class="col-lg">
                     <nav class="navbar navbar-dark bg-success">
@@ -30,7 +31,7 @@ and open the template in the editor.
                         ?>
                     </nav>
                 </div>
-            </div>
+            </div>-->
         </div>
     </body>
 </html>

@@ -44,4 +44,15 @@ abstract class Controlador
             echo '<a class="dropdown-item" href="/ProyectoTecWeb/Vistas/Bienvenida/RegistroUsuario.php"> Registrarse </a>';
         }
     }
+    
+    public function verificaMenuNavegacion()
+    {
+        if (isset($this->usuario) && $this->usuario->rol() == 1)
+        {
+            $op = '<a class="px-1 navbar-brand" href="/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/GestorFarmacia.php">';
+            $op .= 'Gestionar Farmacia';
+            $op .= '</a>';
+            echo $op; 
+        }
+    }
 }

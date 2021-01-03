@@ -35,4 +35,35 @@ class ControladorGestorFarmacia extends Controlador
             header("Location: /ProyectoTecWeb/Vistas/Bienvenida/Bienvenida.php");
         }
     }
+    
+    protected function creaBoton($renglon)
+    {
+        return '<td class="align-middle" scope="row">';
+    }
+    
+    protected function creaTabla($arreglo, $nombres)
+    {
+        $cadena = '<div class="table-responsive"><table class="table align-middle"><thead><tr>';
+        
+        foreach ($nombres as $clave => $valor)
+            $cadena .= '<th scope="col">'.$clave.'</th>';
+        
+        $cadena .= '<th scope="col"> Info. </th></tr></thead><tbody>';
+        
+        foreach($arreglo as $renglon)
+        {
+            $cadena .= '<tr>';
+            
+            foreach ($nombres as $clave => $valor)
+                $cadena .= '<td class="align-middle" scope="row">'
+                .($valor === 'Foto' 
+                ? '<img src="data:image/jpg;base64,'.base64_encode($renglon[$valor]).'" width="180" height="180"/>' 
+                : $renglon[$valor]).'</td>';
+            
+            $cadena .= $this->creaBoton($renglon);
+        }
+        
+        $cadena .= '</tbody></table></div>';
+        return $cadena;
+    }
 }

@@ -29,3 +29,12 @@ function verificaEliminacion()
     var answer = window.confirm("Estás seguro");
     return answer;
 }
+
+function cambiaIdMedicamentoOferta(nodo)
+{
+    var i = nodo.selectedIndex;
+    var seleccionado = nodo.options[i];
+    var destino = document.getElementById('IdMedicamento');
+    
+    destino.value = seleccionado.id;
+}
