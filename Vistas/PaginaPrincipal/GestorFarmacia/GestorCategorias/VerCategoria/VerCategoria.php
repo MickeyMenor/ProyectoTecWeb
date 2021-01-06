@@ -17,7 +17,7 @@ and open the template in the editor.
             <?php 
                 include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/Encabezado/Encabezado.php';
             ?>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row align-items-start">
                     <?php 
                         include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/NavBar/NavBar.php';

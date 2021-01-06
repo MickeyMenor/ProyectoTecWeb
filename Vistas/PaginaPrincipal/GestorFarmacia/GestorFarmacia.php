@@ -14,7 +14,7 @@ and open the template in the editor.
         include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/Metadatos/Metadatos.php';
     ?>
     <body>
-        <div class="container">
+        <div class="container-fluid">
             <?php 
                 include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/Encabezado/Encabezado.php';
             ?>

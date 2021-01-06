@@ -58,3 +58,37 @@ function cambiaIdMedicamentoSeleccionado(nodo)
     
     destino.value = id;
 }
+
+function modificaCosto(diferencia)
+{
+    var nodoCosto = document.getElementById('ImporteTotal');
+    var total = parseFloat(nodoCosto.getAttribute('value'));
+    var costo = Number(total + diferencia).toFixed(2);
+    
+    nodoCosto.setAttribute('value', costo);
+    nodoCosto.innerHTML = '<h3><strong>' + costo + '</strong></h3></td>';
+}
+
+function modificaProducto(idPrecioUn, idPrecioTot, nodo)
+{
+    if (!isNaN(nodo.value))
+    {
+        var cant = nodo.value;
+        var cu = parseFloat(document.getElementById(idPrecioUn).getAttribute('value'));
+        var precio = Number(cu * cant).toFixed(2);
+        var ct = document.getElementById(idPrecioTot);
+        var dif = precio - Number(ct.getAttribute('value')).toFixed(2);
+        
+        ct.setAttribute('value', precio);
+        ct.innerHTML = '<strong>' + precio + '</strong>';
+        modificaCosto(dif);
+    }
+}
+
+function quitaProducto(idProducto, idCosto)
+{
+    var importe = -parseFloat(document.getElementById(idCosto).getAttribute('value'));
+    var nodo = document.getElementById(idProducto);
+    nodo.remove();
+    modificaCosto(importe);
+}

@@ -13,9 +13,6 @@
  */
 include('/opt/lampp/htdocs/ProyectoTecWeb/Controladores/Controlador.php');
 include('/opt/lampp/htdocs/ProyectoTecWeb/Clases/BaseDeDatos.php');
-include('/opt/lampp/htdocs/ProyectoTecWeb/Clases/Medicamento.php');
-include('/opt/lampp/htdocs/ProyectoTecWeb/Clases/Sustancia.php');
-include('/opt/lampp/htdocs/ProyectoTecWeb/Clases/Laboratorio.php');
 
 class ControladorGestorFarmacia extends Controlador
 {
@@ -26,13 +23,13 @@ class ControladorGestorFarmacia extends Controlador
         if (isset($this->usuario))
         {
             if ($this->usuario->rol() != 1)
-                header("Location: /ProyectoTecWeb/Vistas/Bienvenida/Bienvenida.php");
+                header("Location: /ProyectoTecWeb/Vistas/PaginaPrincipal/Productos/Productos.php");
         }
         else
         {
             session_unset(); 
             session_destroy(); 
-            header("Location: /ProyectoTecWeb/Vistas/Bienvenida/Bienvenida.php");
+            header("Location: /ProyectoTecWeb/Vistas/PaginaPrincipal/Productos/Productos.php");
         }
     }
     

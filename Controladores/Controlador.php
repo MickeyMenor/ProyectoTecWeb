@@ -13,6 +13,9 @@
  */
 
 include('/opt/lampp/htdocs/ProyectoTecWeb/Clases/Usuario.php');
+include('/opt/lampp/htdocs/ProyectoTecWeb/Clases/Medicamento.php');
+include('/opt/lampp/htdocs/ProyectoTecWeb/Clases/Sustancia.php');
+include('/opt/lampp/htdocs/ProyectoTecWeb/Clases/Laboratorio.php');
 
 abstract class Controlador 
 {
@@ -36,7 +39,7 @@ abstract class Controlador
         {
             echo '<a class="dropdown-item" href="#">'. $this->usuario->alias().'</a>';
             echo '<a class="dropdown-item" href="/ProyectoTecWeb/Vistas/PaginaPrincipal/PerfilUsuario/PerfilUsuario.php"> Ver perfil </a>';
-            echo '<a class="dropdown-item" href="/ProyectoTecWeb/Controladores/CierraSesion.php"> Cerrar sesión </a>';
+            echo '<a class="dropdown-item" href="/ProyectoTecWeb/Vistas/PaginaPrincipal/PerfilUsuario/CierraSesion.php"> Cerrar sesión </a>';
         }
         else
         {
@@ -60,6 +63,14 @@ abstract class Controlador
     {
         session_unset(); 
         session_destroy(); 
-        header("Location: /ProyectoTecWeb/Vistas/PaginaPrincipal/PaginaPrincipal.php");
+        header("Location: /ProyectoTecWeb/Vistas/PaginaPrincipal/Productos/Productos.php");
+    }
+    
+    protected function validaCarrito()
+    {
+        if (!isset($_SESSION['carrito'])) 
+        {
+            $_SESSION['carrito'] = [];
+        }
     }
 }

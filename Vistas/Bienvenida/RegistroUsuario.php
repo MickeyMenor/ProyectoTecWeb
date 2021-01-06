@@ -57,7 +57,7 @@ and open the template in the editor.
                     </div>
                 </div>
             </form> 
-            <form action="http://localhost:8080/ProyectoTecWeb/Vistas/PaginaPrincipal/PaginaPrincipal.php" method="post">
+            <form action="http://localhost:8080/ProyectoTecWeb/Vistas/PaginaPrincipal/Productos/Productos.php" method="post">
                 <div class="row ml-2 mt-4 mb-2 mb-2">
                     <div class="col-xs">
                         <input class="btn btn-primary" name="botonRegreso" type="submit" value="Regresar">
