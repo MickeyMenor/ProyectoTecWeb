@@ -1,6 +1,6 @@
 <?php
-    include('ControladorGestorProductos.php');
-    $controlador = new ControladorGestorProductos();
+    include('ControladorPerfilUsuario.php');
+    $controlador = new ControladorPerfilUsuario();
 ?>
 <!DOCTYPE html>
 <!--
@@ -16,15 +16,8 @@ and open the template in the editor.
         <div class="container-fluid">
             <?php 
                 include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/Encabezado/Encabezado.php';
+                $controlador->creaTarjetaPerfilUsuario();
             ?>
-            <div class="container">
-                <div class="row align-items-start">
-                    <?php 
-                        include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/NavBar/NavBar.php';
-                        include './TablaProductos/TablaProductos.php';
-                    ?>
-                </div>
-            </div>
         </div>
     </body>
 </html>

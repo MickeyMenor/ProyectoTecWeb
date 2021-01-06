@@ -65,11 +65,13 @@ class ControladorGestorOfertas extends ControladorGestorFarmacia
     
     protected function creaBoton($renglon) 
     {
-        $cadena = parent::creaBoton($renglon);
-        $cadena .= '<a class="btn btn-primary" href="./VerOferta/VerOferta.php';
-        $cadena .= '?id='.$renglon['IdPromocion'].'" role="button"> Ver Oferta </a></td></tr>';
-        
-        return $cadena;
+        ?> 
+        <td class="align-middle" scope="row"> 
+            <a class="btn btn-primary" href="./VerOferta/VerOferta.php?id=<?php echo $renglon['IdPromocion'] ?>" role="button"> 
+                Ver Oferta
+            </a>
+        </td> 
+        <?php   
     }
     
     public function muestraOfertas()

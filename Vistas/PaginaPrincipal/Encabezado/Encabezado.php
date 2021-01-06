@@ -44,9 +44,9 @@ and open the template in the editor.
 <div class="ml-2 mt-3 row align-items-center">
     <div class="col-xl">
         <nav class="navbar navbar-dark bg-success">
-            <a class="px-1 navbar-brand" href="#"> Nuestros productos </a>
-            <a class="px-1 navbar-brand" href="#"> Nuestras ofertas </a>
-            <a class="px-1 navbar-brand" href="#"> Busque un producto </a>
+            <a class="px-1 navbar-brand" href="/ProyectoTecWeb/Vistas/PaginaPrincipal/Productos/Productos.php"> Nuestros productos </a>
+            <a class="px-1 navbar-brand" href="/ProyectoTecWeb/Vistas/PaginaPrincipal/Ofertas/Ofertas.php"> Nuestras ofertas </a>
+            <a class="px-1 navbar-brand" href="/ProyectoTecWeb/Vistas/PaginaPrincipal/BuscaProducto/BuscaProducto.php"> Busque un producto </a>
             <a class="px-1 navbar-brand" href="#"> Contáctenos </a>
             <?php
                 $controlador->verificaMenuNavegacion();

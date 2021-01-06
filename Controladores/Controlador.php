@@ -35,8 +35,8 @@ abstract class Controlador
         if (isset($this->usuario))
         {
             echo '<a class="dropdown-item" href="#">'. $this->usuario->alias().'</a>';
-            echo '<a class="dropdown-item" href="#"> Ver perfil </a>';
-            echo '<a class="dropdown-item" href="#"> Cerrar sesión </a>';
+            echo '<a class="dropdown-item" href="/ProyectoTecWeb/Vistas/PaginaPrincipal/PerfilUsuario/PerfilUsuario.php"> Ver perfil </a>';
+            echo '<a class="dropdown-item" href="/ProyectoTecWeb/Controladores/CierraSesion.php"> Cerrar sesión </a>';
         }
         else
         {
@@ -54,5 +54,12 @@ abstract class Controlador
             $op .= '</a>';
             echo $op; 
         }
+    }
+    
+    public function cierraSesion()
+    {
+        session_unset(); 
+        session_destroy(); 
+        header("Location: /ProyectoTecWeb/Vistas/PaginaPrincipal/PaginaPrincipal.php");
     }
 }

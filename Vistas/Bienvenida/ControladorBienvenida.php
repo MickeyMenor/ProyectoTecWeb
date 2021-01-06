@@ -36,7 +36,7 @@ class ControladorBienvenida
             session_destroy(); 
             session_start();
             $_SESSION['usuario'] = serialize($usuario->aArreglo());
-            header("Location: /ProyectoTecWeb/Vistas/PaginaPrincipal/PaginaPrincipal.php");
+            header('Location: /ProyectoTecWeb/Vistas/PaginaPrincipal/Productos/Productos.php');
         }
         else
         {

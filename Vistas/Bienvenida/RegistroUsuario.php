@@ -15,7 +15,7 @@ and open the template in the editor.
         include('/opt/lampp/htdocs/ProyectoTecWeb/Vistas/Metadatos/Metadatos.php'); 
     ?>
     <body>
-        <div class="container">
+        <div class="container-fluid">
             <header>
             <?php 
                 include('/opt/lampp/htdocs/ProyectoTecWeb/Vistas/Logo/Logo.php'); 

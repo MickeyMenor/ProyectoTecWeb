@@ -1,7 +1,7 @@
 <?php
-    include('/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/GestorOfertas/ControladorGestorOfertas.php');
-    $controlador = new ControladorGestorOfertas();
-    $controlador->nuevaOferta();
+    include('/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/GestorCategoriasMedicamentos/ControladorGestorCategoriasMedicamentos.php');
+    $controlador = new ControladorGestorCategoriasMedicamentos();
+    $controlador->nuevoDetalle();
 ?>
 <!DOCTYPE html>
 <!--
@@ -22,7 +22,7 @@ and open the template in the editor.
                 <div class="row align-items-start">
                     <?php 
                         include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/NavBar/NavBar.php';
-                        include 'FormaRegistroOferta.php';
+                        include 'FormaAgregarACategoria.php';
                     ?>
                 </div>
             </div>

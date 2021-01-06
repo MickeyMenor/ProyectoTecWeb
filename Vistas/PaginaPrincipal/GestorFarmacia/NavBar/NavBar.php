@@ -4,5 +4,6 @@
         <a class="px-1 navbar-brand" href="/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/GestorProductos/GestorProductos.php"> Productos </a>
         <a class="px-1 navbar-brand" href="/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/GestorOfertas/GestorOfertas.php"> Ofertas </a>
         <a class="px-1 navbar-brand" href="/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/GestorCategorias/GestorCategorias.php"> Categorias </a>
+        <a class="px-1 navbar-brand" href="/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/GestorCategoriasMedicamentos/GestorCategoriasMedicamentos.php"> Catalogar </a>
     </nav>
 </div>

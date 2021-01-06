@@ -44,12 +44,12 @@ class ControladorGestorProductos extends ControladorGestorFarmacia
     }
     
     protected function creaBoton($renglon) 
-    {
-        $cadena = parent::creaBoton($renglon);
-        $cadena .= '<a class="btn btn-primary" href="./VerProducto/VerProducto.php';
-        $cadena .= '?id='.$renglon['IdMedicamento'].'" role="button"> Ver Producto </a></td></tr>';
-        
-        return $cadena;
+    { ?> 
+        <td class="align-middle" scope="row"> 
+            <a class="btn btn-primary" href="./VerProducto/VerProducto.php?id=<?php echo $renglon['IdMedicamento'] ?>" role="button"> 
+                Ver Producto 
+            </a>
+        </td> <?php  
     }
     
     private function agregaSustancia($sqli, $nombre)
@@ -221,7 +221,7 @@ class ControladorGestorProductos extends ControladorGestorFarmacia
         $consulta = "SELECT * FROM InfoMedicamentos";
         $resultado = $sqli->query($consulta);
         $arreglo = !$resultado ? array() : $resultado->fetch_all(MYSQLI_ASSOC);
-        echo parent::creaTabla($arreglo, $nombres);
+        parent::creaTabla($arreglo, $nombres);
     }
     
     public function muestraSustancias()

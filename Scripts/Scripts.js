@@ -38,3 +38,23 @@ function cambiaIdMedicamentoOferta(nodo)
     
     destino.value = seleccionado.id;
 }
+
+function cambiaIdCategoriaSeleccionada(nodo)
+{
+    var i = nodo.selectedIndex;
+    var seleccionado = nodo.options[i];
+    var destino = document.getElementById('IdCategoria');
+    var id = seleccionado.id.substring(1, seleccionado.id.length);
+    
+    destino.value = id;
+}
+
+function cambiaIdMedicamentoSeleccionado(nodo)
+{
+    var i = nodo.selectedIndex;
+    var seleccionado = nodo.options[i];
+    var destino = document.getElementById('IdMedicamento');
+    var id = seleccionado.id.substring(1, seleccionado.id.length);
+    
+    destino.value = id;
+}

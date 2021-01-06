@@ -75,11 +75,13 @@ class ControladorGestorCategorias extends ControladorGestorFarmacia
     
     protected function creaBoton($renglon) 
     {
-        $cadena = parent::creaBoton($renglon);
-        $cadena .= '<a class="btn btn-primary" href="./VerCategoria/VerCategoria.php';
-        $cadena .= '?id='.$renglon['IdCategoria'].'" role="button"> Ver Categoria </a></td></tr>';
-        
-        return $cadena;
+        ?> 
+        <td class="align-middle" scope="row"> 
+            <a class="btn btn-primary" href="./VerCategoria/VerCategoria.php?id=<?php echo $renglon['IdCategoria'] ?>" role="button"> 
+                Ver Categoria
+            </a>
+        </td> 
+        <?php  
     }
     
     public function muestraCategorias()
