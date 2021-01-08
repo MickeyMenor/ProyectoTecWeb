@@ -73,4 +73,9 @@ abstract class Controlador
             $_SESSION['carrito'] = [];
         }
     }
+    
+    protected function recreaCarrito()
+    {
+        $_SESSION['carrito'] = [];
+    }
 }

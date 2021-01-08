@@ -1,6 +1,7 @@
 <?php
     include('ControladorCarritoDeCompras.php');
     $controlador = new ControladorCarritoDeCompras();
+    $controlador->validaCompra();
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@ and open the template in the editor.
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 col-md-10 col-md-offset-1">
-                        <form method="post">
+                        <form method="post" action="CarritoDeCompras.php">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -31,7 +32,7 @@ and open the template in the editor.
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <input type="hidden" name="NumProductos" id="NumProductos" value="<?php $controlador->numItemsCarrito() ?>">
+                                    <input type="hidden" name="NumProductos" id="NumProductos" value="<?php $controlador->numItemsCarrito() ?>">
                                     <?php $controlador->creaSketchCarrito(); ?>
                                 </tbody>
                             </table>

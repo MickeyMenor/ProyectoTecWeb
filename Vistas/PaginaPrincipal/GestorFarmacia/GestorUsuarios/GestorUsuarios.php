@@ -1,9 +1,7 @@
 <?php
-    include('ControladorVistaProducto.php');
-    $controlador = new ControladorVistaProducto();
-    $controlador->validaPublicarComentario();
+    include('ControladorGestorUsuarios.php');
+    $controlador = new ControladorGestorUsuarios();
 ?>
-
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -19,16 +17,14 @@ and open the template in the editor.
             <?php 
                 include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/Encabezado/Encabezado.php';
             ?>
-            <section class="ml-5 mt-5" id="main-section">
-                <h2 class="section-heading mb-4">
-                    Detalle del producto: 
-                </h2>
-                <section class="mb-5">
-                    <div class="row">
-                        <?php $controlador->obtenProducto(); ?>
-                    </div>
-                </section> 
-            </section> 
+            <div class="container-fluid">
+                <div class="row align-items-start">
+                    <?php 
+                        include '/opt/lampp/htdocs/ProyectoTecWeb/Vistas/PaginaPrincipal/GestorFarmacia/NavBar/NavBar.php';
+                        include './TablaUsuarios/TablaUsuarios.php';
+                    ?>
+                </div>
+            </div>
         </div>
     </body>
 </html>

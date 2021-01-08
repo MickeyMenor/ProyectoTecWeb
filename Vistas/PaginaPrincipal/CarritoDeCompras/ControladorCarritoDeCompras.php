@@ -16,77 +16,34 @@ include('/opt/lampp/htdocs/ProyectoTecWeb/Clases/BaseDeDatos.php');
 
 class ControladorCarritoDeCompras extends Controlador 
 {
-    private $carrito;
+    private $ruta;
+    private $rutaVistaCompra;
     
     public function __construct()
     {
         parent::__construct();
         parent::validaCarrito();
+        $this->ruta = 'Location: CarritoDeCompras.php';
+        $this->rutaVistaCompra = 'Location: /ProyectoTecWeb/Vistas/PaginaPrincipal/VistaCompra/VistaCompra.php';
     }
     
-    private function creaRenglonCarrito($renglon)
+    private function registraCompra($importe)
     {
-        $id = $renglon['IdMedicamento'];
-        ?>
-        <tr id="<?php echo $id; ?>">
-            <td class="col-sm-8 col-md-6">
-                <div class="media">
-                    <a class="thumbnail pull-left" href="#"> 
-                        <img src="data:image/jpeg;base64,<?php echo base64_encode($renglon['Foto']);?>"width="72" height="72"/>
-                    </a>
-                    <div class="ml-3 media-body">
-                        <h4 class="media-heading"><?php echo $renglon['NombreSustancia']; ?></h4>
-                        <h6 class="media-heading"> <?php echo $renglon['Dosis'].'mg'; ?> </h6>
-                        <h6 class="media-heading"> Laboratorio: <?php echo $renglon['NombreLaboratorio']; ?> </h6>
-                    </div>
-                </div>
-            </td>
-            <td class="col-sm-1 col-md-1" style="text-align: center">
-                <input onchange="modificaProducto('cu-<?php echo $id; ?>', 'ct-<?php echo $id; ?>', this);" type="number" class="form-control" id="cantidad-<?php echo $renglon['IdMedicamento'];?>" value="1" min="1" max="<?php echo $renglon['Stock']; ?>">
-            </td>
-            <td id="cu-<?php echo $id;?>" class="col-sm-1 col-md-1 text-center" value="<?php echo $renglon['CostoConDescuento']; ?>">
-                <strong> <?php echo $renglon['CostoConDescuento']; ?> </strong>
-            </td>
-            <td id="ct-<?php echo $id;?>" class="col-sm-1 col-md-1 text-center" value="<?php echo $renglon['CostoConDescuento']; ?>">
-                <strong> <?php echo $renglon['CostoConDescuento']; ?> </strong>
-            </td>
-            <td class="col-sm-1 col-md-1">
-                <a href="#" onclick="quitaProducto('<?php echo $id;?>', 'ct-<?php echo $id;?>')">
-                    <button type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Quitar </button>
-                </a>
-            </td>
-        </tr>   
-        <?php
+        $idUsuario = $this->usuario->idUsuario();
+        $fecha = date('Y-m-d', time());
+        $sqli = BaseDeDatos::instancia()->sqli();
+        $statement = $sqli->prepare("INSERT INTO Venta (IdUsuario, Fecha, Importe) VALUES (?, ?, ?)");        
+        $statement->bind_param('isd', $idUsuario, $fecha, $importe);
+        $statement->execute();
+        return $sqli->insert_id;
     }
     
-    private function creaRenglonPrecio($renglon, $total)
+    private function registraDetalleCompra($idCompra, $idMedicamento, $cantidad)
     {
-        ?>
-        <tr>
-            <td>   </td>
-            <td>   </td>
-            <td>   </td>
-            <td><h3>Importe</h3></td>
-            <td id="ImporteTotal" class="text-right" value="<?php echo $total; ?>"><h3><strong><?php echo $total; ?></strong></h3></td>
-        </tr>
-        <tr>
-            <td>   </td>
-            <td>   </td>
-            <td>   </td>
-            <td>
-                <button type="button" class="btn btn-primary">
-                    Continuar comprando
-                    <span class="glyphicon glyphicon-shopping-cart"></span> 
-                </button>
-            </td>
-            <td>
-                <button type="button" class="btn btn-success">
-                    Finalizar compra
-                    <span class="glyphicon glyphicon-play"></span>
-                </button>
-            </td>
-        </tr>
-        <?php
+        $sqli = BaseDeDatos::instancia()->sqli();
+        $statement = $sqli->prepare("INSERT INTO DetalleVenta (IdVenta, IdMedicamento, Cantidad) VALUES (?, ?, ?)");        
+        $statement->bind_param('iii', $idCompra, $idMedicamento, $cantidad);
+        $statement->execute();
     }
     
     public function creaSketchCarrito()
@@ -94,17 +51,19 @@ class ControladorCarritoDeCompras extends Controlador
         if(isset($_SESSION['carrito']) && is_array($_SESSION['carrito']))
         {
             $sqli = BaseDeDatos::instancia()->sqli();
-            $suma = 0;
+            $total = 0;
 
             foreach ($_SESSION['carrito'] as $idMed)
             {
                 $resultado = $sqli->query("SELECT * FROM VistaBusquedas WHERE IdMedicamento=".$idMed);
                 $renglon = $resultado->fetch_assoc();
-                $this->creaRenglonCarrito($renglon);
-                $suma += $renglon['CostoConDescuento'];
+                $id = $renglon['IdMedicamento'];
+                
+                include 'DiseñoCarrito/RenglonArticulo.php';
+                $total += $renglon['CostoConDescuento'];
             }
 
-            $this->creaRenglonPrecio($renglon, $suma);
+            include 'DiseñoCarrito/RenglonCosto.php';
         }
     }
     
@@ -113,15 +72,45 @@ class ControladorCarritoDeCompras extends Controlador
         $numItemsCarrito = 0;
         
         if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) 
-        {
             $numItemsCarrito = count($_SESSION['carrito']);
-        }
-
+        
         echo $numItemsCarrito;
     }
     
-    public function quitaDeCarrito($id)
+    public function quitaDeCarrito()
     {
+        $consultas = array();
+        parse_str($_SERVER['QUERY_STRING'], $consultas);
         
+        if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])
+         && isset($consultas['id'])) 
+        {
+            $pos = array_search($_SESSION['carrito'], $consultas['id']);
+            unset($_SESSION['carrito'][$pos]);
+            header($this->ruta);
+        }
+    }
+    
+    public function validaCompra()
+    {
+        if (isset($_POST['realizaCompra']) && isset($_POST['IdSustancia']) 
+         && isset($_POST['cantidad']) && isset($this->usuario))
+        {
+            $importe = $_POST['CostoTotal'];
+            $idCompra = $this->registraCompra($importe);
+            
+            $tam = count($_POST['IdSustancia']);
+            
+            
+            for ($i = 0; $i < $tam; $i++)
+            {
+                $idMedicamento = $_POST['IdSustancia'][$i];
+                $cantidad = $_POST['cantidad'][$i];
+                
+                $this->registraDetalleCompra($idCompra, $idMedicamento, $cantidad);
+            }
+            
+            header($this->rutaVistaCompra.'?id='.$idCompra);
+        }
     }
 }

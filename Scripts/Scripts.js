@@ -66,6 +66,7 @@ function modificaCosto(diferencia)
     var costo = Number(total + diferencia).toFixed(2);
     
     nodoCosto.setAttribute('value', costo);
+    document.getElementById('CostoTotal').value = costo;
     nodoCosto.innerHTML = '<h3><strong>' + costo + '</strong></h3></td>';
 }
 
